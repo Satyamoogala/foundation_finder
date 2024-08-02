@@ -1,0 +1,45 @@
+{% extends"base.html"%}
+
+
+{% block head %}
+<nav class="navbar navbar-dark"style="background-color:black">
+  <img src="/static/ThrowingShade.png"width="180"height="30">
+  <a href="/home"style="color:white">Home</a>  <a href='/submit_image'style="color:white">Submit an Image for Matching</a> <a href="/view_favorites"style="color:white">View My Favorites</a> <a href="/logout"> <input type="button"value="Logout"/> </a>
+</nav>
+
+<style> 
+
+.userimages {object-fit: cover;}
+
+#myphotos {
+  width:100%;
+  height:400;
+  overflow-x:scroll;
+  overflow-y:hidden;
+  white-space:nowrap;
+}
+
+#myphotos a{
+  display:inline-block;
+  vertical-align:middle;
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<h2 style="text-align:center;font-size:5em; margin-top:6%"> Please Select an Image to View Matches </h2>
+<div class="container-fluid">
+<div id="myphotos"> 
+{% for image in user_images %}
+    <a href="/display_matches/{{image.image_id}}"> <img class="userimages"style="width:400px; height:400px"src="{{image.image_location}}"> 
+    </a>
+{% endfor %} 
+</div> 
+</div>
+
+  
+{% endblock %}

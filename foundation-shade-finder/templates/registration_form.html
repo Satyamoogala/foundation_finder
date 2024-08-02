@@ -1,0 +1,107 @@
+{% extends'base.html'%}
+
+{% block content %}
+
+<style> 
+body {background-color: black;}
+</style>
+
+<h2 style="margin-top:6%; text-align:center; font-size: 6rem; color:white"> Registration</h2>
+<br>
+<br>
+
+<div class="container"style="height:52%">
+
+<form action ='/registration', method="post">
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="first_name"style="color:white">First Name</label>
+      <input type="text"class="form-control"name="first_name"id="first_name"placeholder="First Name">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="last_name"style="color:white">Last Name</label>
+      <input type="text"class="form-control"name="last_name"id="last_name"placeholder="Last Name">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="email"style="color:white">Email</label>
+    <input type="email"class="form-control"name="email"id="email"placeholder="Email">
+    </div>  
+    <div class="form-group col-md-6">
+      <label for="password"style="color:white">Password</label>
+      <input type="password"class="form-control"name="password"id="password"placeholder="Password">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="birthday_month"style="color:white">Month</label>
+      <select name="birthday_month"id="birthday_month"class="form-control">
+        {% for month in months %}
+        <option value={{ month}}> {{month}} </option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <div class="form-group col-md-4">
+      <label for="birthday_day"style="color:white">Day</label>
+      <select name="birthday_day"id="birthday_day"class="form-control">
+        {% for day in days %}
+        <option value={{ day}}>{{day}} </option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <div class="form-group col-md-4">
+      <label for="birthday_year"style="color:white">Year</label>
+      <select name="birthday_year"class="form-control"id="birthday_year">
+        {% for year in years %}
+        <option value={{ year}}> {{year}} </option> 
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <br>
+  <input type="submit"class="btn btn-primary"value="Register"style="
+    margin-left:46%;">
+
+</form>
+  
+  <a style="margin-left:43%"href="/login"style="color:white">I would like to Login</a> 
+
+</div>
+
+
+ <!-- Footer -->
+<footer class="page-footer font-small special-color-dark">
+
+    <!-- Footer Elements -->
+
+      <!-- Social buttons -->
+      <ul style="margin-bottom: 0rem;"class="list-unstyled list-inline text-center">
+        <li class="list-inline-item">
+          <a style="color:white"target="_blank"href="https://github.com/shirleyilenechan/Foundation_Project"class="btn-floating btn-fb mx-1">
+            <i class="fab fa-github"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a style="color:white"target="_blank"href="https://www.linkedin.com/in/shirleyilenechan/"class="btn-floating btn-tw mx-1">
+            <i class="fab fa-linkedin"></i>
+          </a>
+      </ul>
+      <!-- Social buttons -->
+
+    <!-- Footer Elements -->
+
+    <!-- Copyright -->
+    <div style="color:white"class="footer-copyright text-center"> Throwing Shade <br>
+            © 2018 Copyright Shirley Chan
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
+{% endblock %}

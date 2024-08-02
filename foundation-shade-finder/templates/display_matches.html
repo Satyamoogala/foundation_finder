@@ -1,0 +1,74 @@
+{% extends"base.html"%}
+
+
+{% block head %}
+
+<style> 
+.userimage {object-fit: cover;}
+</style>
+
+<nav class="navbar navbar-dark"style="background-color:black">
+   <img src="/static/ThrowingShade.png"width="180"height="30">
+  <a href="/home"style="color:white">Home</a>  <a href='/submit_image'style="color:white">Submit an Image for Matching</a> <a href="/select_image"style="color:white">Select an Image to View My Matches</a> <a href="/view_favorites"style="color:white">View My Favorites</a> <a href="/logout"> <input type="button"value="Logout"/> </a>
+</nav>
+
+{% endblock %}
+
+
+{% block content %}
+<div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+            {% for foundation in foundation_products %}
+            <div class="col-md-4">
+              <div class="card mb-4"style="border:3px solid black; height:500px; width:350px"> 
+               <img style="margin-top:14px"width="200"name="foundation_hero_image"height="200"src="{{foundation.hero_image_url}}">
+    
+                
+                
+                <div class="card-body"> 
+                  <p class="card-text"> <a style="margin-top:14px"href="/brand/{{foundation.brand.product_id}}">{{foundation.brand.brand_name}}</a> 
+                  </p>
+                  <div style="height:4em">
+                  <p class="card-text">{{foundation.brand.display_name}}</p>
+                  </div>
+                  <p class="card-text"> Avg Customer Rating: {% for number in range(foundation.brand.rating|round(0,"floor")| int) %}
+                    <i class="fas fa-star"></i>
+                    {% endfor %}
+                    {% if foundation.brand.rating|round> foundation.brand.rating %}
+                    <i class="fas fa-star-half"></i>
+                    {% endif %}
+                  </p> 
+                  <div> View Shade Comparison : <a type="button"data-toggle="popover"data-trigger="hover"data-html="true"data-content="<div><img height='100'width='100'src='{{foundation.shade_image_url}}'><img class='userimage'height='100'width='100'object-fit='cover'src='/{{image.image_location}}'></div>" >
+                    <img src="{{foundation.shade_image_url}}">
+                  </a>
+                </div>
+                  <br>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a target="_blank"href="{{foundation.foundation_target_url}}">
+                        <input type="button"value="View This Product on Sephora"/>
+                        </a>
+                        <img data-sku="{{foundation.sku_id}}" 
+                          class="heart" 
+                          type="button" 
+                          height="30" 
+                          width="30"
+                          style="margin-left:15px"
+                          {% if foundation.sku_id in favorite_skus %}
+                          src= "https://hf-sh.org/sacredheart/wp-content/uploads/sites/3/2017/12/heart-red.png"
+                          {% else %}
+                          src="http://iconshow.me/media/images/ui/iOS7-optimized-icon/png/256/39.heart.png"
+                          {% endif %} > 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% endfor %}
+
+<script src="/static/favorites.js"> </script>
+
+{% endblock %}
